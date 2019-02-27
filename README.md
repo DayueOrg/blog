@@ -19,10 +19,18 @@ npm install
 ```bash
 hexo s
 ```
+- 访问本地服务
+
+http://localhost:4000
+
+- 可视化编辑博客
+
+http://localhost:4000/blog/admin/
+
 ### 部署博客
 
 ```bash
-hexo d
+hexo g & hexo d
 ```
 
 ### 其他
