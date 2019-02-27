@@ -8,7 +8,7 @@ subtitle:
 description:
 keywords:
 author: Da Yue
-language:
+language: zh-CN
 timezone:
 
 # URL
@@ -81,3 +81,10 @@ deploy:
   type: git
   repo: https://github.com/DayueOrg/blog.git
   branch: gh-pages
+
+#hexo可视化验证
+#admin:
+#  username: songxingguo
+#  password_hash: $2a$10$EPfB6/k7xwYOdUtnCukxiOOI97QUYmtv//7.VXy7k5hLtaCNMfmQC
+#  secret: a secret something
+#  deployCommand: './hexo-deploy.sh'
