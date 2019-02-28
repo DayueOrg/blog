@@ -1,21 +1,18 @@
 language: node_js
 node_js:
-  - 8.12.0
+- 8.12.0
 branches:
   only:
-    - master
+  - master
 before_install:
-  - openssl aes-256-cbc -K $encrypted_6c304a9c8c83_key -iv $encrypted_6c304a9c8c83_iv
-    -in id_rsa.enc -out id_rsa -d
-  - chmod 600 ~/.ssh/id_rsa
-  - eval $(ssh-agent)
-  - ssh-add ~/.ssh/id_rsa
-  - cp .travis/ssh_config ~/.ssh/config
-  - git config --global user.name 'songxingguo'
-  - git config --global user.email songxingguo@xiao.com
+- openssl aes-256-cbc -K $encrypted_6c304a9c8c83_key -iv $encrypted_6c304a9c8c83_iv
+  -in id_rsa_blog.enc -out ~/.ssh/id_rsa_blog -d
+- chmod 600 ~/.ssh/id_rsa_blog
+- git config --global user.name 'songxingguo'
+- git config --global user.email songxingguo@xiao.com
 install:
-  - npm install hexo-cli -g
-  - npm install
+- npm install hexo-cli -g
+- npm install
 script:
-  - hexo clean
-  - hexo g -d
+- hexo clean
+- hexo g -d
