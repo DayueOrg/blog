@@ -21,17 +21,23 @@ hexo s
 ```
 - 访问本地服务
 
-http://localhost:4000
+​       http://localhost:4000
 
 - 可视化编辑博客
 
-http://localhost:4000/blog/admin/
+​       http://localhost:4000/blog/admin/
 
 ### 部署博客
+
+- 手动部署
 
 ```bash
 hexo g & hexo d
 ```
+
+   - 自动部署
+
+     执行 `git push`  会触发 travis-ci 进行自动部署。
 
 ### 其他
 
