@@ -2,6 +2,12 @@
 
 大约博客
 
+## 环境
+
+node: 10.14.2
+
+## 使用手册
+
 ### 安装
 
 -  拉取仓库
@@ -9,12 +15,32 @@
 ```bash
 git clone https://github.com/DayueOrg/blog.git
 ```
+- 进入项目目录
+
+```bash
+cd blog
+```
+
 - 安装依赖
 
 ```bash
 npm install
 ```
+- 安装 hexo
+
+Windows
+
+```bash
+npm install -g hexo
+```
+Mac 和 Linux
+```bash
+sudo npm install -g hexo
+```
+
 ### 启动服务器
+
+进入项目目录,执行如下命令：
 
 ```bash
 hexo s
@@ -39,7 +65,7 @@ hexo g & hexo d
 
      执行 `git push`  会触发 travis-ci 进行自动部署。
 
-### 其他
+## hexo 常用命令
 
 -  生成静态文件
 
@@ -51,4 +77,20 @@ hexo g
 
 ```bash
 hexo clean
+```
+
+## 问题
+
+### node 版本不匹配
+
+
+- 升级 node
+
+Mac
+
+```bash
+sudo npm cache clean -f
+sudo npm install -g n
+npm view node versions
+sudo n 10.14.2
 ```
