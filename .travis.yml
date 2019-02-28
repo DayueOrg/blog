@@ -34,4 +34,4 @@ branches:
 env:
   global:
     # Github Pages
-    - GH_REF: github.com/songxingguo/vue-todoList.git
+    - GH_REF: github.com/DayueOrg/blog.git
