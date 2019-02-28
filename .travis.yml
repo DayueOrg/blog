@@ -9,7 +9,7 @@ before_install:
   -in id_rsa_blog.enc -out ~/.ssh/id_rsa_blog -d
 - chmod 600 ~/.ssh/id_rsa_blog
 - git config --global user.name 'songxingguo'
-- git config --global user.email songxingguo@xiao.com
+- git config --global user.email '1328989942@qq.com'
 install:
 - npm install hexo-cli -g
 - npm install
