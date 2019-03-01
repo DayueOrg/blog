@@ -83,8 +83,8 @@ deploy:
   branch: gh-pages
 
 #hexo可视化验证
-#admin:
+admin:
 #  username: songxingguo
 #  password_hash: $2a$10$EPfB6/k7xwYOdUtnCukxiOOI97QUYmtv//7.VXy7k5hLtaCNMfmQC
 #  secret: a secret something
-#  deployCommand: './hexo-deploy.sh'
+  deployCommand: './hexo-deploy.sh'
