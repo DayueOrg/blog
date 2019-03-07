@@ -1,7 +1,7 @@
 title: 记一次 Hexo 博客搭建全过程
-excerpt: 大约的第一篇博客。
+excerpt: 只一篇博客搭建教程足以。
 photos:
-  - 'http://staticfile.lianwiki.cn//blog/blog.jpg'
+  - 'http://staticfile.lianwiki.cn/blog/github-travis-hexo.jpg'
 date: 2019-03-06 17:38:20
 tags:
 ---
@@ -146,10 +146,4 @@ chmod +x hexo-deploy.sh
 发布成功后出现如下界面：
 
 ![Hexo Admin 发布](http://staticfile.lianwiki.cn/blog/hexo-admin-deploy.png)
-
-
-
-
-
-
 
