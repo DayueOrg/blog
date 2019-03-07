@@ -76,6 +76,52 @@ hexo clean & hexo s
 ```
 ![clover 主题](http://staticfile.lianwiki.cn/blog/theme-clover.png)
 
+## 部署到 Github Pages
+
+[Github Pages](https://pages.github.com/) 作为一个静态页面服务器，可以用来展示 Github 项目中的静态页面。所以 Hexo 生成的静态页面就可以直接放到 Github 中进行展示。
+
+通过 [Github Pages 的官方文档](https://help.github.com/en/articles/configuring-a-publishing-source-for-github-pages) ，可以看到一共有三种方式来发布我们的博客，它们分别是 master 分支、gh-pages 分支 或 master分支下的 /docs 目录。
+
+这里我们将采用 gh-pages 分支的方式，将 gh-pages 分支用来存放博客发布后的静态页面，而 master 分支将作为主分支存放博客源码，这样就可以实现发布和创作分离，互不干扰，还可以方便的将博客源码 clone 到不同的电脑上进行博客创作。
+
+**创建 Github 仓库**
+
+首先，访问 [Github](https://github.com/)，点击右上角的个人头像，登入 Github。
+
+然后再点击右上角的加号，并选中 `New repository` ，保持默认选项，点击确认，创建一个全新的代码仓库。
+
+![全新的仓库](http://staticfile.lianwiki.cn/blog/new-repository.png)
+
+**修改配置**
+
+修改博客配置文件 ` _config.yml`：
+
+```bash
+deploy:
+  type: git # 部署类型
+  repository: https://github.com/songxingguo/blog.git # 仓库地址
+  branch: gh-pages # 目标分支
+```
+具体配置可以参看 [Hexo 部署文档](https://hexo.io/zh-cn/docs/deployment) 。
+
+**安装依赖**
+
+安装 hexo-deployer-git。
+
+```bash
+npm install hexo-deployer-git --save
+```
+**部署博客**
+
+清除静态文件并部署博客。
+
+```bash
+hexo clean && hexo deploy
+```
+进入 Github， 点击仓库右上角的 Settings，找到 GitHub Pages ， 并访问博客地址。
+
+![GitHub Pages](http://staticfile.lianwiki.cn/blog/GitHub-Pages.png)
+
 ## 集成 Hexo Admin
 
 Hexo Admin 作为一款 Hexo Web 编辑器，可以方便的进行博客的编辑并发布，并且还可以集成到服务器中进行在线编辑与发布。当然，除了 Hexo Admin 之外，还有其他一些优先的 Hexo 编辑器，比如 [hexo-editor](https://github.com/tajpure/hexo-editor)、[HexoEditor](https://github.com/zhuzhuyule/HexoEditor/) 等。
