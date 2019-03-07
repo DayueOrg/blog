@@ -1,7 +1,11 @@
----
 title: Hello World
 excerpt: 大约的第一篇博客。
-photos: [https://raw.githubusercontent.com/CloverTuan/Markdown_Images/master/qc-staff/qcstaff-cover.png]
+photos:
+  - >-
+    https://raw.githubusercontent.com/CloverTuan/Markdown_Images/master/qc-staff/qcstaff-cover.png
+tags: []
+categories: []
+date: 2019-02-28 10:18:00
 ---
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
