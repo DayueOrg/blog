@@ -10,6 +10,8 @@ tags:
 
 今天，将详细记录一次博客搭建的全过程，主要包括 **博客的初始化**、**主题的更换**、**部署到 [Github Pages](https://pages.github.com/)**、**将源码推送到 Gihub 仓库**、**[Hexo Admin](https://jaredforsyth.com/hexo-admin/) 的集成**、**使用 [Travis CI](https://travis-ci.com) 自动部署**、**博客在线编辑** 等。
 
+> 环境说明： 博客搭建的全过程都是基于 [Node](https://nodejs.org/cn/) 和 [Git](https://git-scm.com/) 环境。
+
 ## 初始化博客
 
 首先，全局安装 Hexo 脚手架。
