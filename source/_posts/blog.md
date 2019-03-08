@@ -8,7 +8,7 @@ tags:
 
 [Hexo](https://hexo.io/zh-cn/) 作为 [众多静态博客框架](http://topspeedsnail.com/static-website-generators_or_tools/) 之一，具有快速、简洁且高效的特点，可基于 [Node](https://nodejs.org/cn/) 环境快速搭建博客，并且拥有众多美观的 [主题](https://hexo.io/themes/) 可以选择。
 
-今天，将详细记录一次博客搭建的全过程，主要包括 **博客的初始化**、**主题的更换**、**部署到 [Github Pages](https://pages.github.com/)**、**将源码推送到 Gihub 仓库**、**[Hexo Admin](https://jaredforsyth.com/hexo-admin/) 的集成**、** [TravisCI](https://travis-ci.com) 持续集成**、**博客在线编辑** 等。
+今天，将详细记录一次博客搭建的全过程，主要包括 **博客的初始化**、**主题的更换**、**部署到 [Github Pages](https://pages.github.com/)**、**将源码推送到 Gihub 仓库**、**[Hexo Admin](https://jaredforsyth.com/hexo-admin/) 的集成**、**使用 [Travis CI](https://travis-ci.com) 自动部署**、**博客在线编辑** 等。
 
 ## 初始化博客
 
@@ -241,3 +241,71 @@ chmod +x hexo-deploy.sh
 
 ![Hexo Admin 发布](http://staticfile.lianwiki.cn/blog/hexo-admin-deploy.png)
 
+## 使用 Travis CI 自动部署
+
+如果对 Travis CI 还不太了解，可以先看一下阮一峰的 [持续集成服务 Travis CI 教程](http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html) 。
+
+如果已经有了一定了解，那我们就可以进入正题了。
+
+**选择仓库**
+
+首先，访问官方网站 [travis-ci.com](https://travis-ci.com)，点击右上角的个人头像，使用 Github 账户登入 Travis CI。
+
+> Travis 会列出 Github 上面你已经激活的项目，以及你已经被授权的组织（对于没有授权的组织可以点击 `MISSING AN ORGANIZATION?` 下面的 [Review and add](https://github.com/settings/connections/applications/88c5b97de2dbfc50f3ac) 进行授权  ）。
+
+然后，点击 [Manage repositories on GitHub](https://github.com/settings/installations/181965) 选择你需要 Travis 帮你构建的仓库。一旦激活了一个仓库，Travis 会监听这个仓库的所有变化。
+ 
+![Manage repositories](http://staticfile.lianwiki.cn/blog/manage-repositories.png)
+ 
+**创建 .travis.yml**
+
+> Travis 要求项目的根目录下面，必须有一个.travis.yml文件。这是配置文件，指定了 Travis 的行为。该文件必须保存在 Github 仓库里面，一旦代码仓库有新的 Commit，Travis 就会去找这个文件，执行里面的命令。
+
+首先，我们需要在项目根目录新建 .travis.yml 文件。
+
+然后，采用 Travis 的快捷部署功能, 将博客静态文件部署到 [Github Pages](https://docs.travis-ci.com/user/deployment/pages/) ，完整配置文件如下：
+
+```bash
+language: node_js
+node_js:
+  - 8.12.0
+
+install:
+  - npm install
+
+script:
+  - hexo clean && hexo g
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local-dir: public # 发布目录|静态文件目录
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  on:
+    branch: master # 源分支
+```
+> **GITHUB_TOKEN** 为 Github 的 **Personal Access Token** ，配置在每个仓库的设置页里面，具体配置步骤下面将逐一介绍。
+
+Travis 为几十种常见服务提供的快捷部署功能， 其他部署方式，请看 [官方文档](https://docs.travis-ci.com/user/deployment/)。
+
+**创建 Personal Access Token**
+
+进入 Github， 点击头像并选择 settings ，然后再点击 `Developer settings` ，最后，进入到 [Personal access tokens](https://github.com/settings/tokens) 。
+
+![Personal Access Token](http://staticfile.lianwiki.cn/blog/Personal-Access-Token.png)
+
+如上图所示，选择勾选第一个选项，点击保存，并复制 **Personal Access Token** 值。
+
+具体创建步骤，请看 [Personal Access Token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) 。
+
+**设置 Personal Access Token**
+
+> 有些环境变量（比如用户名和密码）不能公开，这时可以通过 Travis 网站，写在每个仓库的设置页里面，Travis 会自动把它们加入环境变量。这样一来，脚本内部依然可以使用这些环境变量，但是只有管理员才能看到变量的值。具体操作请看 [官方文档](https://docs.travis-ci.com/user/environment-variables)。
+
+紧接着上面的步骤，打开 [Travis 官网](https://travis-ci.com)，进入到 **仓库设置页面** ， 将上面复制的 **Personal Access Token**，添加到环境变量中，如下图所示。
+
+![设置 Github Token](http://staticfile.lianwiki.cn/blog/Github-Token.png)
+
+**提交 .travis.yml**
+
+最后， 将 .travis.yml 提交到 Github 仓库， Travis 就会开始 **自动部署** 了。
