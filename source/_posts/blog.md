@@ -8,7 +8,7 @@ tags:
 
 [Hexo](https://hexo.io/zh-cn/) 作为 [众多静态博客框架](http://topspeedsnail.com/static-website-generators_or_tools/) 之一，具有快速、简洁且高效的特点，可基于 [Node](https://nodejs.org/cn/) 环境快速搭建博客，并且拥有众多美观的 [主题](https://hexo.io/themes/) 可以选择。
 
-今天，将详细记录一次博客搭建的全过程，主要包括 **博客的初始化**、**主题的更换**、**部署到 Github Pages**、**[Hexo Admin](https://jaredforsyth.com/hexo-admin/) 的集成**、** [TravisCI](https://travis-ci.com) 持续集成**、**博客在线编辑** 等。
+今天，将详细记录一次博客搭建的全过程，主要包括 **博客的初始化**、**主题的更换**、**部署到 [Github Pages](https://pages.github.com/)**、**将源码推送到 Gihub 仓库**、**[Hexo Admin](https://jaredforsyth.com/hexo-admin/) 的集成**、** [TravisCI](https://travis-ci.com) 持续集成**、**博客在线编辑** 等。
 
 ## 初始化博客
 
@@ -143,6 +143,32 @@ permalink_defaults: # 久链接中各部分的默认值
 具体配置可以参看 [网址配置](https://hexo.io/zh-cn/docs/configuration#%E7%BD%91%E5%9D%80) 。
 
 最后，重新执行上面的 **部署博客**，样式就可以显示了。
+
+## 推送源码到 Github 仓库
+
+上面我们已经将博客发布后的静态文件部署到了 Github Pages 上，也可以在线看到我们的博客了，但是  Github Pages 上的代码毕竟是发布后的静态文件，也就是说我们是无法通过它编辑我们的博客。
+
+然而，如果有一天编辑博客的电脑出问题了或者想使用另外一台电脑编辑我们的博客，那么就这都是需要博客源码。
+
+所以最稳妥的方法就是将博客源码也推送到 Github 仓库，我们需要对博客进行创作的时候就可以直接从 Github 仓库拷贝一份下来创作就好了。
+
+**删除主题中的 .git 文件**
+
+由于我们的主题是从代码仓库 clone 下来的，在主题放置目录下（该主题为 `themes/clover` ）会有 .git 文件 ，这样就会导致使用 Git 提交代码时会 **忽略** 主题放置目录下的所有文件，所以我们需要先把 .git 文件从 **主题放置目录** 中 **删除** 。
+
+**推送源码**
+
+```bash
+git init #初始化代码仓库
+git remote add origin https://github.com/songxingguo/blog.git # 关联远程仓库
+git status 
+git add -A
+git commit -m "source code"
+git push -u origin master # 推送并创建 master 分支
+```
+**设置默认分支**
+
+进入 Github 仓库， 点击代码上部的 branches， 然后将默认分支设置为 master ， 这样博客源代码就推送到了 Github 仓库。
 
 ## 集成 Hexo Admin
 
