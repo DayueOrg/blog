@@ -122,6 +122,28 @@ hexo clean && hexo deploy
 
 ![GitHub Pages](http://staticfile.lianwiki.cn/blog/GitHub-Pages.png)
 
+**博客样式加载不出来**
+
+要解决这个问题，首先，需要明白 Github Pages 拥有两种静态页面，一种是项目页面， 网站发布后的地址为： `http(s)://<username>.github.io/<projectname>`, 另外一种是用户页面， 以 `<username>.github.io` 进行命名，并且网站发布后的地址为： `http(s)://<username>.github.io` 。
+
+样式之所以加载不出来，就是这里并没有使用 `<username>.github.io` 进行命名，网站的所有资源（包括样式、图片等）都会被发布在 `http(s)://<username>.github.io` 的子路径 `blog` 下，而 Hexo 会默认从 `http(s)://<username>.github.io` 加载资源，所以样式加载就会出现 `404` 错误。
+
+因此，只需要修改一下 Hexo 配置文件，让 Hexo 从  `blog` 子目录加载样式就好了。
+
+博客根目录下的 `_config.yml` 文件修改如下：
+
+```bash
+url: https://dayueorg.github.io # 网址
+root: /blog # 网站根目录，默认值 :year/:month/:day/:title/
+permalink: :year/:month/:day/:title/ #文章的 永久链接 格式
+permalink_defaults: # 久链接中各部分的默认值	
+```
+> 只需将 **网站根目录** 修改为 **博客名称** 即可。
+
+具体配置可以参看 [网址配置](https://hexo.io/zh-cn/docs/configuration#%E7%BD%91%E5%9D%80) 。
+
+最后，重新执行上面的 **部署博客**，样式就可以显示了。
+
 ## 集成 Hexo Admin
 
 Hexo Admin 作为一款 Hexo Web 编辑器，可以方便的进行博客的编辑并发布，并且还可以集成到服务器中进行在线编辑与发布。当然，除了 Hexo Admin 之外，还有其他一些优先的 Hexo 编辑器，比如 [hexo-editor](https://github.com/tajpure/hexo-editor)、[HexoEditor](https://github.com/zhuzhuyule/HexoEditor/) 等。
@@ -156,7 +178,7 @@ admin:
 ```
 username 不用多说了，就是用户名。password_hash 为一串 bcrypt  哈希值，是通过 [bcrypt](https://www.browserling.com/tools/bcrypt) 加密工具得到的。secret 是用于保证 cookies 安全，所以 secret 越长越复杂越好。
 
-然后， 重启服务，然后再次访问  http://localhost:4000/admin/ ,发现需要登录了。
+然后， 重启服务，再次访问  http://localhost:4000/admin/ ,发现需要登录了。
 
 ```bash
 hexo server -d
