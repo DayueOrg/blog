@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>记一次 Hexo 博客搭建全过程 | 大约</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Hexo 作为 众多静态博客框架 之一，具有快速、简洁且高效的特点，可基于 Node 环境快速搭建博客，并且拥有众多美观的 主题 可以选择。 今天，将详细记录一次博客搭建的全过程，主要包括 博客的初始化、主题的更换、部署到 Github Pages、将源码推送到 Gihub 仓库、Hexo Admin 的集成、使用 Travis CI 自动部署、博客在线编辑 等。 初始化博客首先，全局安装 Hex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次 Hexo 博客搭建全过程">
+<meta property="og:url" content="https://dayueorg.github.io/blog/2019/03/06/blog/index.html">
+<meta property="og:site_name" content="大约">
+<meta property="og:description" content="Hexo 作为 众多静态博客框架 之一，具有快速、简洁且高效的特点，可基于 Node 环境快速搭建博客，并且拥有众多美观的 主题 可以选择。 今天，将详细记录一次博客搭建的全过程，主要包括 博客的初始化、主题的更换、部署到 Github Pages、将源码推送到 Gihub 仓库、Hexo Admin 的集成、使用 Travis CI 自动部署、博客在线编辑 等。 初始化博客首先，全局安装 Hex">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://staticfile.lianwiki.cn/blog/github-travis-hexo.jpg">
+<meta property="og:updated_time" content="2019-03-08T09:58:27.479Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记一次 Hexo 博客搭建全过程">
+<meta name="twitter:description" content="Hexo 作为 众多静态博客框架 之一，具有快速、简洁且高效的特点，可基于 Node 环境快速搭建博客，并且拥有众多美观的 主题 可以选择。 今天，将详细记录一次博客搭建的全过程，主要包括 博客的初始化、主题的更换、部署到 Github Pages、将源码推送到 Gihub 仓库、Hexo Admin 的集成、使用 Travis CI 自动部署、博客在线编辑 等。 初始化博客首先，全局安装 Hex">
+<meta name="twitter:image" content="http://staticfile.lianwiki.cn/blog/github-travis-hexo.jpg">
+  
+  <link rel="stylesheet" href="/blog/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/blog" class="title">大约</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://github.com/DayueOrg" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/blog/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/blog/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/blog/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+
+    <div id="main"><section class="article">
+  <h2 class="title">记一次 Hexo 博客搭建全过程</h2>
+  <p class="sub">3月 6, 2019</p>
+  <article class="content">
+    <p><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a> 作为 <a href="http://topspeedsnail.com/static-website-generators_or_tools/" target="_blank" rel="noopener">众多静态博客框架</a> 之一，具有快速、简洁且高效的特点，可基于 <a href="https://nodejs.org/cn/" target="_blank" rel="noopener">Node</a> 环境快速搭建博客，并且拥有众多美观的 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">主题</a> 可以选择。</p>
+<p>今天，将详细记录一次博客搭建的全过程，主要包括 <strong>博客的初始化</strong>、<strong>主题的更换</strong>、<strong>部署到 <a href="https://pages.github.com/" target="_blank" rel="noopener">Github Pages</a></strong>、<strong>将源码推送到 Gihub 仓库</strong>、<strong><a href="https://jaredforsyth.com/hexo-admin/" target="_blank" rel="noopener">Hexo Admin</a> 的集成</strong>、<strong>使用 <a href="https://travis-ci.com" target="_blank" rel="noopener">Travis CI</a> 自动部署</strong>、<strong>博客在线编辑</strong> 等。</p>
+<h2 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h2><p>首先，全局安装 Hexo 脚手架。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+<p>然后，初始化博客，并进入到博客目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
+<p>紧接着，安装项目依赖。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure></p>
+<p>最后， 启动服务，并访问端口 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> ， 看到如下界面, 说明博客就搭建成功了。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://staticfile.lianwiki.cn/blog/4000-preview.png" alt="4000 端口预览"></p>
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>在正式开始之前，需要在 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">Hexo 主题列表</a> 中选取一个喜欢的主题（该博客为 <a href="https://clovertuan.github.io/" target="_blank" rel="noopener">Clover</a> 主题）。</p>
+<p><strong>安装主题</strong></p>
+<p>首先，进入到所选主题的 <a href="https://github.com/esappear/hexo-theme-clover" target="_blank" rel="noopener">github 项目</a> 页面， 并拷贝主题 github 路径（该博客为: <code>https://github.com/esappear/hexo-theme-clover</code> ）。</p>
+<p>然后，再进入到博客根目录，并执行如下命令将主题代码拷贝到 themes/clover 目录下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/esappear/hexo-theme-clover themes/clover</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其中， themes/clover 为主题要存放的目录。</p>
+</blockquote>
+<p><strong>修改配置</strong></p>
+<p>修改博客根目录下的 <code>_config.yml</code> 文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: clover</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>需要注意的是 <strong>theme 主题的名称</strong> 需要与 <strong>主题存放目录的名称</strong> 一致，否则 Hexo 是无法找到相应的主题。</p>
+</blockquote>
+<p><strong>安装依赖</strong></p>
+<p>每个主题需要安装的依赖可能有所不同，具体需要查看相应主题的 <a href="https://github.com/esappear/hexo-theme-clover" target="_blank" rel="noopener">说明文件</a>。</p>
+<p><strong>下面以 Clover 为例，需要添加如下依赖：</strong></p>
+<p>hexo-renderer-sass：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-renderer-sass --save</span><br></pre></td></tr></table></figure>
+<p>最后，执行下方的命令清除静态文件，并重启服务，访问端口 <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> ， 看到如下界面就说明主题修改成功。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp; hexo s</span><br></pre></td></tr></table></figure>
+<p><img src="http://staticfile.lianwiki.cn/blog/theme-clover.png" alt="clover 主题"></p>
+<h2 id="部署到-Github-Pages"><a href="#部署到-Github-Pages" class="headerlink" title="部署到 Github Pages"></a>部署到 Github Pages</h2><p><a href="https://pages.github.com/" target="_blank" rel="noopener">Github Pages</a> 作为一个静态页面服务器，可以用来展示 Github 项目中的静态页面。所以 Hexo 生成的静态页面就可以直接放到 Github 中进行展示。</p>
+<p>通过 <a href="https://help.github.com/en/articles/configuring-a-publishing-source-for-github-pages" target="_blank" rel="noopener">Github Pages 的官方文档</a> ，可以看到一共有三种方式来发布我们的博客，它们分别是 master 分支、gh-pages 分支 或 master分支下的 /docs 目录。</p>
+<p>这里我们将采用 gh-pages 分支的方式，将 gh-pages 分支用来存放博客发布后的静态页面，而 master 分支将作为主分支存放博客源码，这样就可以实现发布和创作分离，互不干扰，还可以方便的将博客源码 clone 到不同的电脑上进行博客创作。</p>
+<p><strong>创建 Github 仓库</strong></p>
+<p>首先，访问 <a href="https://github.com/" target="_blank" rel="noopener">Github</a>，点击右上角的个人头像，登入 Github。</p>
+<p>然后再点击右上角的加号，并选中 <code>New repository</code> ，保持默认选项，点击确认，创建一个全新的代码仓库。</p>
+<p><img src="http://staticfile.lianwiki.cn/blog/new-repository.png" alt="全新的仓库"></p>
+<p><strong>修改配置</strong></p>
+<p>修改博客配置文件 <code>_config.yml</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git <span class="comment"># 部署类型</span></span><br><span class="line">  repository: https://github.com/songxingguo/blog.git <span class="comment"># 仓库地址</span></span><br><span class="line">  branch: gh-pages <span class="comment"># 目标分支</span></span><br></pre></td></tr></table></figure>
+<p>具体配置可以参看 <a href="https://hexo.io/zh-cn/docs/deployment" target="_blank" rel="noopener">Hexo 部署文档</a> 。</p>
+<p><strong>安装依赖</strong></p>
+<p>安装 hexo-deployer-git。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p><strong>部署博客</strong></p>
+<p>清除静态文件并部署博客。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
+<p>进入 Github， 点击仓库右上角的 Settings，找到 GitHub Pages ， 并访问博客地址。</p>
+<p><img src="http://staticfile.lianwiki.cn/blog/GitHub-Pages.png" alt="GitHub Pages"></p>
+<p><strong>博客样式加载不出来</strong></p>
+<p>要解决这个问题，首先，需要明白 Github Pages 拥有两种静态页面，一种是项目页面， 网站发布后的地址为： <code>http(s)://&lt;username&gt;.github.io/&lt;projectname&gt;</code>, 另外一种是用户页面， 以 <code>&lt;username&gt;.github.io</code> 进行命名，并且网站发布后的地址为： <code>http(s)://&lt;username&gt;.github.io</code> 。</p>
+<p>样式之所以加载不出来，就是这里并没有使用 <code>&lt;username&gt;.github.io</code> 进行命名，网站的所有资源（包括样式、图片等）都会被发布在 <code>http(s)://&lt;username&gt;.github.io</code> 的子路径 <code>blog</code> 下，而 Hexo 会默认从 <code>http(s)://&lt;username&gt;.github.io</code> 加载资源，所以样式加载就会出现 <code>404</code> 错误。</p>
+<p>因此，只需要修改一下 Hexo 配置文件，让 Hexo 从  <code>blog</code> 子目录加载样式就好了。</p>
+<p>博客根目录下的 <code>_config.yml</code> 文件修改如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">url: https://dayueorg.github.io <span class="comment"># 网址</span></span><br><span class="line">root: /blog <span class="comment"># 网站根目录，默认值 :year/:month/:day/:title/</span></span><br><span class="line">permalink: :year/:month/:day/:title/ <span class="comment">#文章的 永久链接 格式</span></span><br><span class="line">permalink_defaults: <span class="comment"># 久链接中各部分的默认值</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>只需将 <strong>网站根目录</strong> 修改为 <strong>博客名称</strong> 即可。</p>
+</blockquote>
+<p>具体配置可以参看 <a href="https://hexo.io/zh-cn/docs/configuration#%E7%BD%91%E5%9D%80" target="_blank" rel="noopener">网址配置</a> 。</p>
+<p>最后，重新执行上面的 <strong>部署博客</strong>，样式就可以显示了。</p>
+<h2 id="推送源码到-Github-仓库"><a href="#推送源码到-Github-仓库" class="headerlink" title="推送源码到 Github 仓库"></a>推送源码到 Github 仓库</h2><p>上面我们已经将博客发布后的静态文件部署到了 Github Pages 上，也可以在线看到我们的博客了，但是  Github Pages 上的代码毕竟是发布后的静态文件，也就是说我们是无法通过它编辑我们的博客。</p>
+<p>然而，如果有一天编辑博客的电脑出问题了或者想使用另外一台电脑编辑我们的博客，那么就这都是需要博客源码。</p>
+<p>所以最稳妥的方法就是将博客源码也推送到 Github 仓库，我们需要对博客进行创作的时候就可以直接从 Github 仓库拷贝一份下来创作就好了。</p>
+<p><strong>删除主题中的 .git 文件</strong></p>
+<p>由于我们的主题是从代码仓库 clone 下来的，在主题放置目录下（该主题为 <code>themes/clover</code> ）会有 .git 文件 ，这样就会导致使用 Git 提交代码时会 <strong>忽略</strong> 主题放置目录下的所有文件，所以我们需要先把 .git 文件从 <strong>主题放置目录</strong> 中 <strong>删除</strong> 。</p>
+<p><strong>推送源码</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git init <span class="comment">#初始化代码仓库</span></span><br><span class="line">git remote add origin https://github.com/songxingguo/blog.git <span class="comment"># 关联远程仓库</span></span><br><span class="line">git status </span><br><span class="line">git add -A</span><br><span class="line">git commit -m <span class="string">"source code"</span></span><br><span class="line">git push -u origin master <span class="comment"># 推送并创建 master 分支</span></span><br></pre></td></tr></table></figure>
+<p><strong>设置默认分支</strong></p>
+<p>进入 Github 仓库， 点击代码上部的 branches， 然后将默认分支设置为 master ， 这样博客源代码就推送到了 Github 仓库。</p>
+<h2 id="集成-Hexo-Admin"><a href="#集成-Hexo-Admin" class="headerlink" title="集成 Hexo Admin"></a>集成 Hexo Admin</h2><p>Hexo Admin 作为一款 Hexo Web 编辑器，可以方便的进行博客的编辑并发布，并且还可以集成到服务器中进行在线编辑与发布。当然，除了 Hexo Admin 之外，还有其他一些优先的 Hexo 编辑器，比如 <a href="https://github.com/tajpure/hexo-editor" target="_blank" rel="noopener">hexo-editor</a>、<a href="https://github.com/zhuzhuyule/HexoEditor/" target="_blank" rel="noopener">HexoEditor</a> 等。</p>
+<p>那下面就说说如何集成那么一款好用的 Hexo 编辑器到自己的博客中。</p>
+<p><strong>安装 Hexo Admin</strong></p>
+<p>首先，进入到博客根目录，执行下面的安装命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-admin</span><br></pre></td></tr></table></figure>
+<p>然后， 重启服务，并访问地址 <a href="http://localhost:4000/admin/" target="_blank" rel="noopener">http://localhost:4000/admin/</a> ，就可以看到 Hexo Admmin 编辑器的真身了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server -d</span><br></pre></td></tr></table></figure>
+<p><img src="http://staticfile.lianwiki.cn/blog/hexo-admin.png" alt="Hexo Admin"></p>
+<p><strong>配置用户名和密码</strong></p>
+<p>作为一款可以在线编辑的 Hexo 编辑器，登录验证自然是少不了的了，所以我们需要配置一些登录相关的用户名和密码。</p>
+<p>首先，修改博客配置文件 <code>_config.yml</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">admin:</span><br><span class="line">  username: myfavoritename</span><br><span class="line">  password_hash: be121740bf988b2225a313fa1f107ca1</span><br><span class="line">  secret: a secret something</span><br></pre></td></tr></table></figure>
+<p>username 不用多说了，就是用户名。password_hash 为一串 bcrypt  哈希值，是通过 <a href="https://www.browserling.com/tools/bcrypt" target="_blank" rel="noopener">bcrypt</a> 加密工具得到的。secret 是用于保证 cookies 安全，所以 secret 越长越复杂越好。</p>
+<p>然后， 重启服务，再次访问  <a href="http://localhost:4000/admin/" target="_blank" rel="noopener">http://localhost:4000/admin/</a> ,发现需要登录了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server -d</span><br></pre></td></tr></table></figure>
+<p><img src="http://staticfile.lianwiki.cn/blog/hexo-admin-login.png" alt="Hexo Admin 登录"></p>
+<p><strong>配置发布</strong></p>
+<blockquote>
+<p>在开始之前，首先声明该配置是针对 Linux 而言是可行的，对于 Windows 会出现 <a href="https://github.com/jaredly/hexo-admin/issues/94" target="_blank" rel="noopener"><code>Error: spawn UNKNOWN</code></a> 错误。</p>
+</blockquote>
+<p>Hexo 的发布</p>
+<p>首先，修改博客配置文件  _config.yml。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">admin:</span><br><span class="line">  deployCommand: <span class="string">'./hexo-deploy.sh'</span></span><br></pre></td></tr></table></figure>
+<p>然后，在博客根目录添加文件 hexo-deploy.sh，hexo-deploy.sh 内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+<p>最后，修改权限。</p>
+<blockquote>
+<p>Linux/Unix 的文件调用权限分为三级 : 文件拥有者、群组、其他。利用 chmod 可以藉以控制文件如何被他人所调用。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x hexo-deploy.sh</span><br></pre></td></tr></table></figure>
+<p>发布成功后出现如下界面：</p>
+<p><img src="http://staticfile.lianwiki.cn/blog/hexo-admin-deploy.png" alt="Hexo Admin 发布"></p>
+<h2 id="使用-Travis-CI-自动部署"><a href="#使用-Travis-CI-自动部署" class="headerlink" title="使用 Travis CI 自动部署"></a>使用 Travis CI 自动部署</h2><p>经过上面一些列的步骤之后，我们已经搭建了一个比较完善的博客了，可以部署到 Github Pages 、也可以可视化编辑了。</p>
+<p>但是唯一的不足就是每次写好博客之后，我都要进行两项操作，第一、部署博客到 Github Pages； 第二、提交源码的 Github 仓库。那有没有什么操作可以让两者合二为一的呢？</p>
+<p>当然是有的，也就是下面要介绍的 Travis CI，有了它就只需要把源代码提交代码仓库就行了，部署发布 Travis 就会自动完成，是不很棒(๑•̀ㅂ•́)و✧啦。 </p>
+<p>如果对 Travis CI 还不太了解，可以先看一下阮一峰的 <a href="http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html" target="_blank" rel="noopener">持续集成服务 Travis CI 教程</a> 。</p>
+<p>如果已经有了一定了解，那我们就可以进入正题了。</p>
+<p><strong>选择仓库</strong></p>
+<p>首先，访问官方网站 <a href="https://travis-ci.com" target="_blank" rel="noopener">travis-ci.com</a>，点击右上角的个人头像，使用 Github 账户登入 Travis CI。</p>
+<blockquote>
+<p>Travis 会列出 Github 上面你已经激活的项目，以及你已经被授权的组织（对于没有授权的组织可以点击 <code>MISSING AN ORGANIZATION?</code> 下面的 <a href="https://github.com/settings/connections/applications/88c5b97de2dbfc50f3ac" target="_blank" rel="noopener">Review and add</a> 进行授权  ）。</p>
+</blockquote>
+<p>然后，点击 <a href="https://github.com/settings/installations/181965" target="_blank" rel="noopener">Manage repositories on GitHub</a> 选择你需要 Travis 帮你构建的仓库。一旦激活了一个仓库，Travis 会监听这个仓库的所有变化。</p>
+<p><img src="http://staticfile.lianwiki.cn/blog/manage-repositories.png" alt="Manage repositories"></p>
+<p><strong>创建 .travis.yml</strong></p>
+<blockquote>
+<p>Travis 要求项目的根目录下面，必须有一个.travis.yml文件。这是配置文件，指定了 Travis 的行为。该文件必须保存在 Github 仓库里面，一旦代码仓库有新的 Commit，Travis 就会去找这个文件，执行里面的命令。</p>
+</blockquote>
+<p>首先，我们需要在项目根目录新建 .travis.yml 文件。</p>
+<p>然后，采用 Travis 的快捷部署功能, 将博客静态文件部署到 <a href="https://docs.travis-ci.com/user/deployment/pages/" target="_blank" rel="noopener">Github Pages</a> ，完整配置文件如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">language: node_js</span><br><span class="line">node_js:</span><br><span class="line">  - 8.12.0</span><br><span class="line"></span><br><span class="line">install:</span><br><span class="line">  - npm install</span><br><span class="line"></span><br><span class="line">script:</span><br><span class="line">  - hexo clean &amp;&amp; hexo g</span><br><span class="line"></span><br><span class="line">deploy:</span><br><span class="line">  provider: pages</span><br><span class="line">  skip_cleanup: <span class="literal">true</span></span><br><span class="line">  <span class="built_in">local</span>-dir: public <span class="comment"># 发布目录|静态文件目录</span></span><br><span class="line">  github_token: <span class="variable">$GITHUB_TOKEN</span> <span class="comment"># Set in travis-ci.org dashboard</span></span><br><span class="line">  on:</span><br><span class="line">    branch: master <span class="comment"># 源分支</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>GITHUB_TOKEN</strong> 为 Github 的 <strong>Personal Access Token</strong> ，配置在每个仓库的设置页里面，具体配置步骤下面将逐一介绍。</p>
+</blockquote>
+<p>Travis 为几十种常见服务提供的快捷部署功能， 其他部署方式，请看 <a href="https://docs.travis-ci.com/user/deployment/" target="_blank" rel="noopener">官方文档</a>。</p>
+<p><strong>创建 Personal Access Token</strong></p>
+<p>进入 Github， 点击头像并选择 settings ，然后再点击 <code>Developer settings</code> ，最后，进入到 <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">Personal access tokens</a> 。</p>
+<p><img src="http://staticfile.lianwiki.cn/blog/Personal-Access-Token.png" alt="Personal Access Token"></p>
+<p>如上图所示，选择勾选第一个选项，点击保存，并复制 <strong>Personal Access Token</strong> 值。</p>
+<p>具体创建步骤，请看 <a href="https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line" target="_blank" rel="noopener">Personal Access Token</a> 。</p>
+<p><strong>设置 Personal Access Token</strong></p>
+<blockquote>
+<p>有些环境变量（比如用户名和密码）不能公开，这时可以通过 Travis 网站，写在每个仓库的设置页里面，Travis 会自动把它们加入环境变量。这样一来，脚本内部依然可以使用这些环境变量，但是只有管理员才能看到变量的值。具体操作请看 <a href="https://docs.travis-ci.com/user/environment-variables" target="_blank" rel="noopener">官方文档</a>。</p>
+</blockquote>
+<p>紧接着上面的步骤，打开 <a href="https://travis-ci.com" target="_blank" rel="noopener">Travis 官网</a>，进入到 <strong>仓库设置页面</strong> ， 将上面复制的 <strong>Personal Access Token</strong>，添加到环境变量中，如下图所示。</p>
+<p><img src="http://staticfile.lianwiki.cn/blog/Github-Token.png" alt="设置 Github Token"></p>
+<p><strong>提交 .travis.yml</strong></p>
+<p>最后， 将 .travis.yml 提交到 Github 仓库， Travis 就会开始 <strong>自动部署</strong> 了。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  x@xiao.ai
+  
+    
+      
+        · <a href="https://github.com/DayueOrg" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Da Yue</span>
+</footer>
+  </div>
+</body>
+</html>
