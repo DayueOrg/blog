@@ -243,6 +243,12 @@ chmod +x hexo-deploy.sh
 
 ## 使用 Travis CI 自动部署
 
+经过上面一些列的步骤之后，我们已经搭建了一个比较完善的博客了，可以部署到 Github Pages 、也可以可视化编辑了。
+
+但是唯一的不足就是每次写好博客之后，我都要进行两项操作，第一、部署博客到 Github Pages； 第二、提交源码的 Github 仓库。那有没有什么操作可以让两者合二为一的呢？
+
+当然是有的，也就是下面要介绍的 Travis CI，有了它就只需要把源代码提交代码仓库就行了，部署发布 Travis 就会自动完成，是不很棒(๑•̀ㅂ•́)و✧啦。 
+
 如果对 Travis CI 还不太了解，可以先看一下阮一峰的 [持续集成服务 Travis CI 教程](http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html) 。
 
 如果已经有了一定了解，那我们就可以进入正题了。
